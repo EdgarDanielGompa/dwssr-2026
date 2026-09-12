@@ -1,4 +1,5 @@
-![Pleca  ITGAM] (.github/assets/pleca_itgam.jpg)
+![Pleca  ITGAM](.github/assets/pleca_itgam.jpg)
+
 #🌐🕷️ Desarrollo de Aplicaciones Web Server Side Rendering 2026
 
 Proyecto de la materia de Desarrollo Web Server Side Rendering
