@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "start": "DEBUG=dwssr-2026node:* ./server/bin/www.js",
-    "greet": "echo 'Hola mundo'"
-  },
+ "scripts": {
+  "start": "DEBUG=dwssr-2026:* node ./server/bin/www.js",
+  "dev": "DEBUG=dwssr-2026:* node ./server/bin/www.js",
+  "greet": "echo 'Hola mundo'"
+},
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
