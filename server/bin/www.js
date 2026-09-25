@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '../app'
+import app from '../app.js'
 //Importando debug
 import createDebug from "debug"
 import http from 'node:http'
