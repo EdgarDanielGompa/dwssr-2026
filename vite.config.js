@@ -1,4 +1,4 @@
-//Importando configuradot de vite
+//Importando configurado de vite
 import { defineConfig } from 'vite'
 //Importando un admoin de rutas
 import {resolve} from 'node:path'
