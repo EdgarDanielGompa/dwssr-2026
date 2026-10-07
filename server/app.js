@@ -14,14 +14,16 @@ import cookieParser from 'cookie-parser'
 //❌var logger = require('morgan');
 import logger from 'morgan'
 //import biblioteca debug para depuracion de errores
-import createDebug from "debug"
+import createDebug from "debug" //👈
 
 //imports para crear Dirname
 import { fileURLToPath } from 'node:url';
 import {dirname} from 'node:path';
+//importando el template engine de Handlebars
+import hbs from 'hbs'
 
 //creacion del objeto debug
-const debug = createDebug('dwssr-2026:server')
+const debug = createDebug('dwssr-2026:server')//👈
 //crendo las variables
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,19 +33,31 @@ const __dirname = dirname(__filename);
 import indexRouter from './routes/index.js'
 //var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
+//importando el registrador del helper
+import { registerViteHelper } from './lib/vite.js'
+
+
 //se crea la aplicacion express
 debug("🔨creando aplicacion express")
 var app = express();
 
-// Configurar el motor de plantillas y la carpeta de vistas
+// Configurar el motor de vistas con hbs y la carpeta de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+//Registro helper
+registerViteHelper(hbs)
 
 // Configurar middlewares para manejar peticiones HTTP
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+//Archivos estaticos para produccion
+if(process.env.NODE_ENV == 'production'){
+  app.use(express.static(path.join(__dirname, '..' ,'dist')));
+}
 
 // Configurar la carpeta de archivos estáticos 
 debug("🔨creando servidor de archivos estaticos")
