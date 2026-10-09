@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production DEBUG=dwssr-2026:* node ./server/bin/www.js",
     "dev": "DEBUG=dwssr-2026:* nodemon ./server/bin/www.js",
     "greet": "echo 'Hola mundo'",
-    "dev:vite": "vite",
+    "dev:vite": "--vite",
     "dev:all": "concurrently \"npm run dev \" \"npm run dev:vite \"",
     "build": "vite build",
     "preview": "npm run build && npm start"
