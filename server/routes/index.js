@@ -3,10 +3,18 @@ const router = express.Router();
 
 //var express = require('express');
 //var router = express.Router();
+let counter = 0;
+const numbers = []
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  counter++;
+  numbers.push(counter);
+  res.render('index', { 
+    title: 'Edgar Daniel Beltran Acuña',
+    counter: counter,
+    numbers
+   });
 });
 
 //module.exports = router;
