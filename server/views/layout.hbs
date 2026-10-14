@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Carga de scripts y estilos-->
+    {{!-- Cargando los scripts con el helper --}}
+    {{{viteAssets}}}
+    
+
   </head>
   <body>
     {{{body}}}

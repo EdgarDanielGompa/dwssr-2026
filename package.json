@@ -4,12 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "DEBUG=dwssr-2026:* node ./server/bin/www.js",
+    "start": "NODE_ENV=production DEBUG=dwssr-2026:* node ./server/bin/www.js",
     "dev": "DEBUG=dwssr-2026:* nodemon ./server/bin/www.js",
-    "greet": "echo 'Hola mundo'"
+    "greet": "echo 'Hola mundo'",
+    "dev:vite": "vite --host",
+    "dev:all": "concurrently \"npm run dev \" \"npm run dev:vite \"",
+    "build": "vite build",
+    "preview": "npm run build && npm start",
+    "Lint:all": "npm run Lint:back && npm run Lint:front",
+    "Lint:back": "eslint \"server/**/*\"",
+    "Lint:front": "eslint \"src/**/*\"",
+    "Lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4", 
+    "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "hbs": "~4.0.4",
@@ -17,10 +25,22 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
-  }, "imports": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "audit": "^0.0.6",
+    "concurrently": "^10.0.5",
+    "config-prettier": "^0.3.0",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "fix": "^0.0.6",
+    "globals": "^17.13.0",
+    "nodemon": "^3.1.14",
+    "npm": "^12.2.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.2"
+  },
+  "imports": {
     "#server/*": "./server/*",
     "#routes/*": "./server/routes/*"
   }
-  
 }
