@@ -83,7 +83,7 @@ app.use(function(err, req, res, _next) {
   res.status(err.status || 500);
   res.render('error');
 });
-//Ejemplo de codigo inalcanzable 
+//Esto es un ejemplo de codigo inalcanzable 
 //(()=>{
   //let age = 10;
   //return age
