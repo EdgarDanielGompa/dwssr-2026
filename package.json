@@ -10,7 +10,11 @@
     "dev:vite": "vite --host",
     "dev:all": "concurrently \"npm run dev \" \"npm run dev:vite \"",
     "build": "vite build",
-    "preview": "npm run build && npm start"
+    "preview": "npm run build && npm start",
+    "Lint:all": "npm run Lint:back && npm run Lint:front",
+    "Lint:back": "eslint \"server/**/*\"",
+    "Lint:front": "eslint \"src/**/*\"",
+    "Lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,11 +26,19 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "audit": "^0.0.6",
     "concurrently": "^10.0.5",
+    "config-prettier": "^0.3.0",
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
+    "fix": "^0.0.6",
     "globals": "^17.13.0",
     "nodemon": "^3.1.14",
+    "npm": "^12.2.0",
     "vite": "^8.3.2"
+  },
+    "imports": {
+    "#server/*": "./server/*",
+    "#routes/*": "./server/routes/*"
   }
 }

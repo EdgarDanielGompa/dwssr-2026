@@ -10,7 +10,7 @@ export default defineConfig([
       "node_modules/**"
     ]
   },
-  // 2) Config del Back-end
+  // 2) Condig del Back-end
   { 
     files: ["server/**/*.{js,mjs}"],
     plugins: { js }, 
@@ -21,7 +21,10 @@ export default defineConfig([
       globals: {
         ...globals.node
         } 
-      } 
+      },
+      rules:{
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+      }
     },
   // 2.1) Config de Vite
   { 
@@ -36,7 +39,7 @@ export default defineConfig([
         } 
       } 
     },
-  // 3) Config del front-end
+  // 3) Condig del front-end
   { 
     files: ["src/**/*.{js,mjs}"],
     plugins: { js }, 

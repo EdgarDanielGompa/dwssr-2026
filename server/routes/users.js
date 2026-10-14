@@ -4,7 +4,7 @@ const router = express.Router();
 //var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res, _next) {
   res.send('<h1 style="color:blue;">LISTA DE USUARIOS</h1>');
 });
 
