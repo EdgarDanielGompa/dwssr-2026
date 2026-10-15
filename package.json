@@ -11,10 +11,10 @@
     "dev:all": "concurrently \"npm run dev \" \"npm run dev:vite \"",
     "build": "vite build",
     "preview": "npm run build && npm start",
-    "Lint:all": "npm run Lint:back && npm run Lint:front",
-    "Lint:back": "eslint \"server/**/*\"",
-    "Lint:front": "eslint \"src/**/*\"",
-    "Lint:fix": "eslint . --fix"
+    "lint:all": "npm run lint:back && npm run lint:front",
+    "lint:back": "eslint \"server/**/*.js\"",
+    "lint:front": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

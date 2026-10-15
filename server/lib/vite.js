@@ -63,6 +63,6 @@ export function viteAssets(){
    export function registerViteHelper(hbs){
     hbs.registerHelper('viteAssets', () => {
         //Sanitizando la salida del helper
-        return new hbs.SafeString(viteAssets(viteAssets()))
+        return new hbs.SafeString(viteAssets())
     })
    }
