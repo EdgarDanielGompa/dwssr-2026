@@ -4,6 +4,7 @@ const router = express.Router();
 //var router = express.Router();
 
 /* GET users listing. */
+// eslint-disable-next-line
 router.get('/', function(req, res, _next) {
   res.send('<h1 style="color: red;">LISTA DE AMIGOS</h1>');
 });

@@ -2,6 +2,7 @@
 import fs from 'node:fs'
 //Biblioteca de rutas
 import path from 'node:path'
+// eslint-disable-next-line
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url';
 //Creando la variable de rutas

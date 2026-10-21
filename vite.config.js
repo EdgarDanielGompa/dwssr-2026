@@ -2,11 +2,13 @@
 import {defineConfig} from 'vite';
 //Importando un admin de rutas 
 import {resolve} from 'node:path';
-// importando tailwindcss
-import tailwindcss from '@tailwindcss/vite';
+// importando tailwind - no la uso por que no se esta declarando
+//import tailwind from '@tailwindcss/vite'
 //Imports para crear dirname
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
+
 //Creando las variables de ruta 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,6 +22,7 @@ export default defineConfig({
     server: {
         //Puerto de escucha
         port: 5173,
+        cors: true, // Habilita CORS para permitir solicitudes desde Express
         //Rigidez del puerto
         strict: true,
     },
@@ -37,7 +40,6 @@ export default defineConfig({
                 main: resolve(__dirname, 'src/main.js')
             }
         }
-    },
-    //Configuración para el desarrollo
-    publicDir: false
+    }
+
 })

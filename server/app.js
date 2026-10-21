@@ -1,23 +1,18 @@
 //Funcion para manejar errores de la aplicacion
-//❌var createError = require('http-errors');
 import createError from 'http-errors'
 //Importar el framework express
-//❌var express = require('express');
 import express from 'express'
 //Importar el modulo path para manejar rutas de archivos
-// ❌var path = require('path');
 import path from 'node:path'
 //Importar el modulo cookie-parser para manejar cookies
-//❌var cookieParser = require('cookie-parser');
 import cookieParser from 'cookie-parser'
 //manejar logs de peticiones HTTP en el servidor
-//❌var logger = require('morgan');
 import logger from 'morgan'
 //import biblioteca debug para depuracion de errores
 import createDebug from "debug" //👈
-
 //imports para crear Dirname
 import { fileURLToPath } from 'node:url';
+// eslint-disable-next-line
 import {dirname} from 'node:path';
 //importando el template engine de Handlebars
 import hbs from 'hbs'
@@ -55,7 +50,7 @@ app.use(cookieParser());
 
 
 //Archivos estaticos para produccion
-if(process.env.NODE_ENV == 'production'){
+if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, '..' ,'dist')));
 }
 
@@ -69,16 +64,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Capturar errores 404 y redirigir al manejador de errores
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 //Manejamos errores de la aplicacion, mostrando un mensaje de error y el stacktrace en desarrollo
-app.use(function(err, req, res, _next) {
+app.use((err, req, res, _next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
