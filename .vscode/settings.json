@@ -2,5 +2,9 @@
   "editor.fontSize": 14,
   "terminal.integrated.fontSize": 13,
   "editor.tabSize": 2,
-  "editor.insertSpaces": true
+  "editor.insertSpaces": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll": "always"
+  }
 }
