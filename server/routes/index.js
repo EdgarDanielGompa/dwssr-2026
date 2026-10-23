@@ -1,21 +1,22 @@
-import express from 'express'
+import express from 'express';
+
 const router = express.Router();
 
 //var express = require('express');
 //var router = express.Router();
-let counter=0;
-const numbers = []
+let counter = 0;
+const numbers = [];
 
 /* GET home page. */
 // eslint-disable-next-line
-router.get('/', function(req, res, _next) {
-  counter++;
+router.get('/', function (req, res, _next) {
+  counter+= 1;
   numbers.push(counter);
-  res.render('index', { 
+  res.render('index', {
     title: 'Edgar Daniel Beltran Acuña',
     counter,
-    numbers
-   });
+    numbers,
+  });
 });
 
 //module.exports = router;

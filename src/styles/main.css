@@ -1,23 +1,26 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 /*
 Linea que informa a tailwind donde estan
 las vistas de nuestra app
 */
 @source "../../server/views/**/*.hbs";
-p{
-    margin-top: 20px
+p {
+  margin-top: 20px;
 }
+body {
+  padding: 50px;
+  font:
+    14px 'Lucida Grande',
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+/*
 body{
     padding:50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-/*
-body{
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+h1{
+    color: crimson;
 }
-h1 {
-    color: #00B7FF;
-}
-    /*
-
+*/

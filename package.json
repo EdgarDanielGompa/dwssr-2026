@@ -14,7 +14,10 @@
     "lint:all": "npm run lint:back && npm run lint:front",
     "lint:back": "eslint \"server/**/*.js\"",
     "lint:front": "eslint \"src/**/*.js\"",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -25,17 +28,16 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.5",
     "@tailwindcss/vite": "^4.3.3",
-    "audit": "^0.0.6",
     "concurrently": "^10.0.5",
     "config-prettier": "^0.3.0",
-    "eslint": "^10.12.0",
+    "eslint": "^9.39.5",
+    "eslint-config-airbnb-extended": "^3.3.0",
     "eslint-config-prettier": "^10.1.8",
-    "fix": "^0.0.6",
     "globals": "^17.13.0",
     "nodemon": "^3.1.14",
-    "npm": "^12.2.0",
+    "prettier": "^3.9.10",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.2"
   },
