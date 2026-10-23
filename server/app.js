@@ -11,7 +11,6 @@ import createDebug from 'debug'; //👈
 //imports para crear Dirname
 import { fileURLToPath } from 'node:url';
 //Importar el modulo path para manejar rutas de archivos
-import path from 'node:path';
 import { dirname } from 'node:path';
 //importando el template engine de Handlebars
 import hbs from 'hbs';
