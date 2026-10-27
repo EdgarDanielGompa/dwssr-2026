@@ -2,8 +2,8 @@
 import fs from 'node:fs';
 //Biblioteca de rutas
  
-import { dirname, path } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';//🛠️
 import createDebug from "debug";
 
 const debug = createDebug('dwssr-2026:server');
@@ -44,7 +44,7 @@ export function viteAssets() {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
   const mainEntry = manifest['main.js'];
   //guarda el main.js
-  if (!mainEntry) {
+    if (!mainEntry) {
     debug("Archivo main.js no esta disponible en el manifiesto de vite");
     return '';
   }
