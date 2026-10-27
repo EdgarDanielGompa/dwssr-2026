@@ -11,15 +11,14 @@ import createDebug from 'debug'; //👈
 //imports para crear Dirname
 import { fileURLToPath } from 'node:url';
 //Importar el modulo path para manejar rutas de archivos
-import { dirname } from 'node:path';
+import { dirname, path } from 'node:path';
 //importando el template engine de Handlebars
 import hbs from 'hbs';
 
 //Se importan las rutas de la aplicacion
-//var indexRouter = require('./routes/index');
+// eslint-disable-next-line import-x/no-rename-default
 import indexRouter from '#routes/index.js';
-//
-//var usersRouter = require('./routes/users');
+// eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
 //importando el registrador del helper
 import { registerViteHelper } from './lib/vite.js';
