@@ -5,7 +5,7 @@ import express from 'express';
 //Importar el modulo cookie-parser para manejar cookies
 import cookieParser from 'cookie-parser';
 //manejar logs de peticiones HTTP en el servidor
-import logger from 'morgan';
+import morgan from 'morgan';
 //import biblioteca debug para depuracion de errores
 import createDebug from 'debug'; //👈
 //imports para crear Dirname
@@ -40,7 +40,7 @@ app.set('view engine', 'hbs');
 registerViteHelper(hbs);
 
 // Configurar middlewares para manejar peticiones HTTP
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
