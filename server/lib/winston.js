@@ -1,69 +1,72 @@
 //importando el core de winston
-import winston, {format} from 'winston';
-//importando bibliotecas de node
+import winston, { format } from 'winston';
+//impportando
 import path from 'node:path';
 
 import fs from 'node:fs';
-//importando el plug-in de winston
+//importando winston
 import DailyRotateFile from 'winston-daily-rotate-file';
 
+//desectuctura funciones utiles de format
+const { combine, timestamp, label, printf, colorize, prettyPrint } = format;
 
-//desestructura funciones utiles de format
-const {combine, timestamp, label, printf, colorize,
-  prettyPrint } = format;
+//creando variable de directorio raiz
+const rootdir = path.resolve(process.cwd());
 
-  //creando variable del directorio raiz
-  const rootdir = path.resolve(process.cwd());
-
-  //creando directorios de logs
-  const logDir = path.join(rootdir, 'logs');
-  if(!fs.existsSync(logDir)) {
-    fs.mkdirSync(logDir, { recursive: true });
-  }
-   
-//Definiendo esquema de colores
-const colors = {  
-error: 'red',
-warn: 'yellow',
-info: 'green',
-http: 'magenta',
-debug:  'blue',
+//creando directorio de logd
+const logDir = path.join(rootdir, 'logs');
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
 }
 
-//Agregando ese esquema a winston
+//definindo esquema de coloree
+const colors = {
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+  http: 'magenta',
+  debug: 'blue',
+};
+
+//agregando ese esquema a winsron
 winston.addColors(colors);
 
-//Creando plantillas para los formatos
+//creacion de plantillas para los formsatos
 
-//Formato de consola
+// Formato de consola
 const myConsoleFormat = combine(
-  //Colores de formato
-  colorize({all: true}),
-//Agregando una etiqueta
-label({label: '📢: '}),
-//agregando fecha
-timestamp({format: "DD-MM-YYYY HH:mm:ss"}),
-//funcion de impresion
-printf((info)=> `${info.level} ${info.label} ${info.timestamp} ${info.mensaje}`,
-),
+  // Colores del formato
+  colorize({ all: true }),
+
+  // Agregando etiqueta al log
+  label({ label: '📢: ' }),
+
+  // Registro de fecha
+  timestamp({ format: 'DD-MM-YYYY HH:mm:ss' }),
+
+  // Función de impresión
+  printf(
+    (info) =>
+      `${info.level} ${info.label} ${info.timestamp} ${info.message}`,
+  ),
 );
 
 //archivos json
 const myFileFormat = combine(
   //retirar colorizacion
   format.uncolorize(),
-  //agregar fecha
+  //sgergar fecha i50
   timestamp(),
   //salida
   format.json(),
 );
 
-//Construyendo y configurando transportes
+//CONTRULLENDO Y CONFI TRANSPORTES
 const options = {
   errorFile: {
     level: 'error',
-    filename: path.join(rootdir, 'logs', 'error.log'),
-    maxsize: 5242880, //5MB
+    filename: path.join(logDir, 'logs', 'error.log'),
+    maxsize: 5242880, //5mb
     maxFiles: 2,
     format: myFileFormat,
   },
@@ -74,8 +77,8 @@ const options = {
   },
   readableFile: {
     level: 'info',
-    filename: path.join(logDir, 'readable.log'),
-    maxsize: 5242880, //5MB
+    filename: path.join(logDir, 'logs', 'readable.log'),
+    maxsize: 5242880, //5mb
     maxFiles: 2,
     format: combine(
       format.uncolorize(),
@@ -86,33 +89,34 @@ const options = {
   dailyRotateFile: {
     level: 'info',
     filename: path.join(logDir, 'logs', 'app-%DATE%.log'),
-    datePattern: 'YYYY-MM-DD',
-    zipperArchive: true,
-    maxsize: 5242880, //5MB
+    datePattern: 'YYYY-MM-DD-HH',
+    zippedArchive: true,
+    maxsize: 5242880, //5mb
     maxFiles: 2,
     format: myFileFormat,
   },
 };
 
-//creando el logger
+//creando looger
 const logger = winston.createLogger({
   transports: [
     new DailyRotateFile(options.dailyRotateFile),
-    new winston.transport.File(options.redableFile),
-    new winston.transport.File(options.errorFile),
+    new winston.transports.File(options.readableFile),
+    new winston.transports.File(options.errorFile),
+    new winston.transports.Console(options.console),
   ],
   exeptionHandlers: [
-    new winston.transport.File({
-      filename: path.join(logDir, 'exceptions.log'),
+    new winston.transports.File({
+      filename: path.join(logDir, 'exception.log'),
     }),
   ],
   rejectionHandlers: [
-    new winston.transport.File({
+    new winston.transports.File({
       filename: path.join(logDir, 'rejection.log'),
     }),
   ],
   exitOnError: false,
 });
 
-//exportamos logger
+//exportmaos looger
 export default logger;

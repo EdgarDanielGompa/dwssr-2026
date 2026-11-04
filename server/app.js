@@ -1,88 +1,90 @@
-//Funcion para manejar errores de la aplicacion
+// Funcion para manejar errores en la aplicacion
 import createError from 'http-errors';
-//Importar el framework express
+// Importa el framework express
 import express from 'express';
-//Importar el modulo cookie-parser para manejar cookies
-import cookieParser from 'cookie-parser';
-//manejar logs de peticiones HTTP en el servidor
-import morgan from 'morgan';
-//import biblioteca debug para depuracion de errores
-import createDebug from 'debug'; //👈
-//imports para crear Dirname
+// Importa modulos para manejar rutas (path)
+
 import { fileURLToPath } from 'node:url';
-//Importar el modulo path para manejar rutas de archivos
+// eslint-disable-next-line
 import path, { dirname } from 'node:path';
-//importando el template engine de Handlebars
+
+//importando el template engine handlebars
 import hbs from 'hbs';
 
-//Se importan las rutas de la aplicacion
+//importando el registrador del helper
+
+// Para cookies
+import cookieParser from 'cookie-parser';
+// Registro para saber que pasa en el servidor (Morgan)
+import morgan from 'morgan';
+//importaando debug
+import createDebug from 'debug';
+
+// Se importan las rutas de la aplicacion
  
 import indexRouter from '#routes/index.js';
 // eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
-//importando el registrador del helper
 import { registerViteHelper } from './lib/vite.js';
-//Importando la configuracion de winston logger
- import logger from "./lib/winston.js"
+//importando wiston
+import logger from './lib/winston.js';
 
-//creacion del objeto debug
-const debug = createDebug('dwssr-2026:server'); //👈
-//crendo las variables
+// Recreación de __dirname para ES Modules
+const debug = createDebug('dwssr-2026:server');
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
-//se crea la aplicacion express
-debug('🔨creando aplicacion express');
+// Crea la aplicacion de express
+debug('🔨creado back end');
 const app = express();
 
-// Configurar el motor de vistas con hbs y la carpeta de vistas
+// Configura el motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-//Registro helper
 registerViteHelper(hbs);
 
-// Configurar middlewares para manejar peticiones HTTP
- app.use(morgan('dev'), { stream:{ write: (msg)=>logger.info(msg.trim()) }});
+// Configurar middlewares de la aplicacion
+app.use(morgan('dev', { stream: { write: (msg) => logger.info(msg.trim()) } }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//Archivos estaticos para produccion
+//archivos estaticos para producion
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'dist')));
 }
 
-// Configurar la carpeta de archivos estáticos
-debug('🔨creando servidor de archivos estaticos');
+// Configuracion de archivos estaticos
+debug('🔨Configuración de archivos estáticos');
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-//Registrar las rutas de la aplicacion
-debug('🔨registrando rutas de la aplicacion');
+// Registramos las rutas
+debug('🔨 Registramos las rutas');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// Capturar errores 404 y redirigir al manejador de errores
+// Catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });
 
-//Manejamos errores de la aplicacion, mostrando un mensaje de error y el stacktrace en desarrollo
+// Error handler
+
 app.use((err, req, res, _next) => {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
-//Esto es un ejemplo de codigo inalcanzable
+//ejemplo de codigo inlcanzable
 //(()=>{
-//let age = 10;
+//let age=10
+
+//if (age< 10) {
+//console.log("age is less than 10")
+//}
 //return age
-//if (age == 18) {
-//console.log ("Codigo")
-// }
-//})
+//})()
 
 //module.exports = app;
 export default app;
