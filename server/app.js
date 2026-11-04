@@ -16,12 +16,14 @@ import path, { dirname } from 'node:path';
 import hbs from 'hbs';
 
 //Se importan las rutas de la aplicacion
-// eslint-disable-next-line import-x/no-rename-default
+ 
 import indexRouter from '#routes/index.js';
 // eslint-disable-next-line import-x/no-rename-default
 import usersRouter from '#routes/users.js';
 //importando el registrador del helper
 import { registerViteHelper } from './lib/vite.js';
+//Importando la configuracion de winston logger
+ import logger from "./lib/winston.js"
 
 //creacion del objeto debug
 const debug = createDebug('dwssr-2026:server'); //👈
@@ -40,7 +42,7 @@ app.set('view engine', 'hbs');
 registerViteHelper(hbs);
 
 // Configurar middlewares para manejar peticiones HTTP
-app.use(morgan('dev'));
+ app.use(morgan('dev'), { stream:{ write: (msg)=>logger.info(msg.trim()) }});
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
