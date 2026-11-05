@@ -5,6 +5,7 @@ const indexRouter = express.Router();
 
 //var express = require('express');
 //var router = express.Router();
+//ruta de la pagina
 let counter = 0;
 const numbers = [];
 
