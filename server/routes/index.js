@@ -22,11 +22,11 @@ indexRouter.get('/', (req, res, _next) => {
 //rutas para pruevas de logs
 //acceder a get /test-logs
 indexRouter.get('/test-logs', (req, res) => {
-  logger.error('Esto es un mensaje de ERROR algo falló');
-  logger.warn('Esto es un mensaje de WARN algo podría estar mal');
-  logger.info('Esto es un mensaje de INFO operación exitosa');
-  logger.http('Esto es un mensaje de HTTP petición recibida');
-  logger.debug('Esto es un mensaje de DEBUG detalle de depuración');
+  logger.error('Esto es un menssaje de ERROR - algo fallo');
+  logger.warn('Esto es un mensaje de WARN - algo podría estar mal');
+  logger.info('Esto es un mensaje de INFO - operación exitosa');
+  logger.http('Esto es un mensaje de HTTP - petición recibida');
+  logger.debug('Esto es un mensaje de DEBUG - detalle de depuración');
 
   res.json({
     message:

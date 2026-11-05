@@ -44,7 +44,13 @@ app.set('view engine', 'hbs');
 registerViteHelper(hbs);
 
 // Configurar middlewares de la aplicacion
-app.use(morgan('dev', { stream: { write: (msg) => logger.info(msg.trim()) } }));
+app.use(morgan('dev', { 
+  stream: { 
+    write: (msg) => logger.info(msg.trim()) 
+  } 
+})
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

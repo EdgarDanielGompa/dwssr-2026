@@ -14,9 +14,9 @@ const { combine, timestamp, label, printf, colorize, prettyPrint } = format;
 const rootdir = path.resolve(process.cwd());
 
 //creando directorio de logd
-const logDir = path.join(rootdir, 'logs');
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
+const logsDir = path.join(rootdir, 'logs');
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
 }
 
 //definindo esquema de coloree
@@ -65,7 +65,7 @@ const myFileFormat = combine(
 const options = {
   errorFile: {
     level: 'error',
-    filename: path.join(logDir, 'logs', 'error.log'),
+    filename: path.join(logsDir, 'logs', 'error.log'),
     maxsize: 5242880, //5mb
     maxFiles: 2,
     format: myFileFormat,
@@ -77,7 +77,7 @@ const options = {
   },
   readableFile: {
     level: 'info',
-    filename: path.join(logDir, 'logs', 'readable.log'),
+    filename: path.join(logsDir, 'logs', 'readable.log'),
     maxsize: 5242880, //5mb
     maxFiles: 2,
     format: combine(
@@ -88,7 +88,7 @@ const options = {
   },
   dailyRotateFile: {
     level: 'info',
-    filename: path.join(logDir, 'logs', 'app-%DATE%.log'),
+    filename: path.join(logsDir, 'logs', 'app-%DATE%.log'),
     datePattern: 'YYYY-MM-DD-HH',
     zippedArchive: true,
     maxsize: 5242880, //5mb
@@ -107,12 +107,12 @@ const logger = winston.createLogger({
   ],
   exeptionHandlers: [
     new winston.transports.File({
-      filename: path.join(logDir, 'exception.log'),
+      filename: path.join(logsDir, 'exception.log'),
     }),
   ],
   rejectionHandlers: [
     new winston.transports.File({
-      filename: path.join(logDir, 'rejection.log'),
+      filename: path.join(logsDir, 'rejection.log'),
     }),
   ],
   exitOnError: false,
