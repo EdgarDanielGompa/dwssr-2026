@@ -82,11 +82,17 @@ app.use((req, res, next) => {
 // Error handler
 
 app.use((err, req, res, _next) => {
+  //set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ?   {
+    status: err.status || 500,
+    stack: err.stack, 
+  } :{};
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 //ejemplo de codigo inlcanzable
 //(()=>{
 //let age=10

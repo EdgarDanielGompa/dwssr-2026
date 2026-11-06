@@ -105,7 +105,7 @@ const logger = winston.createLogger({
     new winston.transports.File(options.errorFile),
     new winston.transports.Console(options.console),
   ],
-  exeptionHandlers: [
+  exceptionHandlers: [
     new winston.transports.File({
       filename: path.join(logsDir, 'exception.log'),
     }),
